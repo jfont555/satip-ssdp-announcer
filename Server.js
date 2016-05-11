@@ -1,3 +1,6 @@
+/**
+ * Created by Jordi.Font on 02/05/2016.
+ */
 var uuid = require('uuid');
 
 
@@ -20,28 +23,13 @@ exports.CreateServer = function (options) {
 
         var Server = require('node-ssdp').Server // Create new server command
             , server = new Server({
-                /*
-                 ssdpSig String SSDP signature. Default: node.js/NODE_VERSION UPnP/1.1 node-ssdp/PACKAGE_VERSION
-                 ssdpIp String SSDP multicast group. Default: 239.255.255.250.
-                 ssdpPort Number SSDP port. Default: 1900
-                 ssdpTtl Number Multicast TTL. Default: 1
-                 adInterval Number advertise event frequency (ms). Default: 10 sec.
-                 unicastHost String IP address or hostname of server where SSDP service is running. This is used in HOST header. Default: 0.0.0.0.
-                 location String URL pointing to description of your service, or a function which returns that URL
-                 udn String Unique Device Name. Default: uuid:f40c2981-7329-40b7-8b04-27f187aecfb5.
-                 description String Path to description file. Default: upnp/desc.php.
-                 ttl Number Packet TTL. Default: 1800.
-                 allowWildcards Boolean Accept wildcards (*) in serviceTypes of M-SEARCH packets, e.g. usn:Belkin:device:**. Default: false
-                 */
                 logLevel: 'INFO',
                 ssdpSig: 'SAT>IP Server, UPnP/1.0, SAT>IP/nodejs/linux/0.0.1\r\nDEVICEID.SES.COM: 17',
-//    ssdpSig:    'ALi TDS, UPnP/1.0, Portable SDK for UPnP devices/1.6.18',
                 ssdpTtl: 2,
                 adInterval: 20000,
                 udn: options.uuid,
                 ttl: 120,
-//	description: '"http://schemas.upnp.org/upnp/1/0/"; ns=01',
-                location: 'http://' + options.serverIP + ':'+options.HTTPServerPort+options.HTTPServerPath
+                location: 'http://' + options.serverIP + ':'+options.HTTPServerPort+'/'+options.HTTPXMLPath
 
             });
         server.addUSN('upnp:rootdevice');
@@ -52,12 +40,12 @@ exports.CreateServer = function (options) {
         server.on('advertise-alive', function (headers) {
             // Expire old devices from your cache.
             // Register advertising device somewhere (as designated in http headers heads)
-            console.log(headers);
+            //console.log(headers);
         });
 
         server.on('advertise-bye', function (headers) {
             // Remove specified device from cache.
-            console.log(headers);
+            //console.log(headers);
         });
 
         // start the server
@@ -78,7 +66,7 @@ function InitHTTP(options, cb) {
         console.log('Configuration error');
         process.exit();
     } else {
-        var router = Router({static_route: options.path});
+        var router = Router({static_route: __dirname +'/' +options.path});
         var server = http.createServer(router);
         server.listen(options.port);
 
