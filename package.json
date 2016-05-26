@@ -1,0 +1,23 @@
+{
+  "name": "SSDP_SATIP_Server",
+  "description": "A SSDP server implementation for a SAT>IP server",
+  "version": "0.0.1",
+  "author": "Jordi Font <jfont555@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jfont555/SSDP_SATIP_Server"
+  },
+  "dependencies":{
+    "uuid": "2.0.1",
+    "stdio":"0.2.7",
+    "node-ssdp": "2.0.1"
+
+  },
+  "licences":[
+    {
+      "type": "",
+      "url": " "
+    }
+  ]
+}
+
