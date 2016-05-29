@@ -15,7 +15,8 @@ exports.CreateServer = function (options) {
 
     var configureHTTP = {
         path: options.HTTPServerPath,
-        port: options.HTTPServerPort
+        port: options.HTTPServerPort,
+        logger: options.logger
     }
     if(options.deviceIDSes !== undefined){
         deviceIDSesCom = options.deviceIDSes;
@@ -24,7 +25,7 @@ exports.CreateServer = function (options) {
     if(options.HTTPServerPath !== undefined) {
         InitHTTP(configureHTTP, function (status) {
             if (status) {
-                console.log('HTTP Server UP')
+                options.logger.info('HTTP Server UP')
             }
         });
     }
@@ -46,20 +47,20 @@ exports.CreateServer = function (options) {
 
 
     server.on('advertise-alive', function (headers) {
-      console.log('advertise-alive', headers);
+        options.logger.info('Advertise-alive');
+        options.logger.debug('advertise-alive', headers);
         // Expire old devices from your cache.
         // Register advertising device somewhere (as designated in http headers heads)
     });
 
     server.on('advertise-bye', function (headers) {
-//      console.log('advertise-bye', headers);
-        // Remove specified device from cache.
+        options.logger.info('Advertise-bye');
     });
 
-// start the server
     server.start('0.0.0.0');
 
     process.on('exit', function () {
+        options.logger.info('Advertise-shutting down & stop listening');
         server.stop() // advertise shutting down and stop listening
     });
 }
@@ -68,14 +69,14 @@ function InitHTTP(options, cb) {
     var http = require('http');
     var Router = require('node-simple-router');
     if (options.path == undefined || options.port == undefined) {
-        console.log('Configuration error');
+        options.logger.error('Configuration error');
         process.exit();
     } else {
         var router = Router({static_route: __dirname +'/' +options.path});
         var server = http.createServer(router);
         server.listen(options.port);
 
-        console.log("Init HTTP server on port: " + options.port);
+        options.logger.info("Init HTTP server on port: " + options.port);
         cb(true);
     }
 }
