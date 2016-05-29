@@ -14,28 +14,33 @@ var option = {
 var  userOptions= stdio.getopt({
     'HTTPServerPath': {
         key: 'p',
-        description: 'Path fo HTTP Server',
+        description: 'Path for HTTP Server (When HTTP server is created). Default is the local project source',
         args: 1
     },
     'PathXml': {
         key: 'x',
-        description: 'Path to Xml file',
+        description: 'Path to Xml file. Indicate the path to the file must be set for local or extern file',
         args: 1,
         mandatory: true
     },
     'HTTPServerPort': {
         key: 'P',
-        description: 'Port to use for HTTP server. Default is 3400',
+        description: 'Port of the HTTP server. It set the port for a extern server or the local http server port. Default is 3400',
         args: 1
     },
     'serverIP': {
         key: 't',
-        description: 'SAT>IP server. Default is local IP',
+        description: 'URL pointing to description of your sevice. Default is local IP',
         args: 1
     },
     'DeviceIDSesCom': {
         key: 'd',
         description: 'Set DeviceIDSesCom, default is 17',
+        args: 1
+    },
+    'UUID': {
+        key: 'u',
+        description: 'Set UUID, default is a time generated uuid',
         args: 1
     }
 });
@@ -54,6 +59,9 @@ if(userOptions.serverIP !== undefined){
 }
 if(userOptions.DeviceIDSesCom !== undefined){
     option.deviceIDSes = userOptions.DeviceIDSesCom;
+}
+if(userOptions.UUID !== undefined){
+    option.uuid = userOptions.UUID;
 }
 ssdp.CreateServer(option);
 

@@ -8,9 +8,10 @@
     "url": "https://github.com/jfont555/SSDP_SATIP_Server"
   },
   "dependencies":{
-    "uuid": "2.0.1",
-    "stdio":"0.2.7",
-    "node-ssdp": "2.0.1"
+    "uuid": ">=2.0.1",
+    "stdio":">=0.2.7",
+    "node-ssdp": ">=2.0.1",
+    "node-simple-router": ">=0.10.0"
 
   },
   "licences":[
