@@ -5,7 +5,7 @@ var ssdp = require('./Server.js');
 var stdio = require('stdio');
 
 var option = {
-    HTTPServerPath: "",
+    HTTPServerPath: undefined,
     HTTPXMLPath: "",
     HTTPServerPort: 3400,
     serverIP: myIP()
@@ -14,7 +14,7 @@ var option = {
 var  userOptions= stdio.getopt({
     'HTTPServerPath': {
         key: 'p',
-        description: 'Path for HTTP Server (When HTTP server is created). Default is the local project source',
+        description: 'Path for HTTP Server (When HTTP server is created). Default is the local project source.',
         args: 1
     },
     'PathXml': {
@@ -63,6 +63,7 @@ if(userOptions.DeviceIDSesCom !== undefined){
 if(userOptions.UUID !== undefined){
     option.uuid = userOptions.UUID;
 }
+console.log(option.HTTPServerPath);
 ssdp.CreateServer(option);
 
 function myIP() {

@@ -31,7 +31,9 @@ Use it like other node tools
 
 Using with HTTP server to publish the XML file (Server is local in port 3400, uuid is auto-generated (should be the same as XML) )
 
-    sudo node index.js -d 1 -x DeviceDesc.xml
+    sudo node index.js -d 1 -x DeviceDesc.xml -p /
+
+Note that somethin must be passed as argument when using local server.
 
 Using with XML in a exter server
 
