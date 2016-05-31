@@ -40,7 +40,9 @@ Using with XML in a exter server
     sudo ndoe index.js -d 1 -t 192.168.1.5 -P 9985 -x satip_server/desc.xml
 
 
+**NOTE*+
 
+If SAT>IP client extract the location from udp packet, it will assume that SAT>IP server is in the same location as this tool.
 
 
 ##TO-DO##

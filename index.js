@@ -16,23 +16,28 @@ logger.remove(logger.transports.Console);
 var  userOptions= stdio.getopt({
     'HTTPServerPath': {
         key: 'p',
-        description: 'Path for HTTP Server (When HTTP server is created). Default is the local project source.',
+        description: 'Path for HTTP Server (When is used).' +
+        '                                         Default is the local project source.\n',
         args: 1
     },
     'PathXml': {
         key: 'x',
-        description: 'Path to Xml file. Indicate the path to the file must be set for local or extern file',
+        description: 'Path to Xml file. Indicate the path to\n' +
+        '                                the file must be set for local or extern file\n',
         args: 1,
         mandatory: true
     },
     'HTTPServerPort': {
         key: 'P',
-        description: 'Port of the HTTP server. It set the port for a extern server or the local http server port. Default is 3400',
+        description: 'Port of the HTTP server.\n' +
+        '                                It set the port for a extern server\n' +
+        '                                or the local http server port. Default 3400\n',
         args: 1
     },
     'serverIP': {
         key: 't',
-        description: 'URL pointing to description of your sevice. Default is local IP',
+        description: 'URL pointing to description of your sevice.\n' +
+        '                                Default is local IP.\n',
         args: 1
     },
     'DeviceIDSesCom': {
